@@ -1,0 +1,82 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| information        |
+| mysql              |
+| performance_schema |
+| student            |
+| test               |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use mysql;
+Database changed
+mysql> create table information(name varchar(100),age int(200),address varchar(100));
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> insert into information values('Jack',18,'kerala');
+Query OK, 1 row affected (0.79 sec)
+
+mysql> desc information;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| name    | varchar(100) | YES  |     | NULL    |       |
+| age     | int(200)     | YES  |     | NULL    |       |
+| address | varchar(100) | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> select* from information;
++-------+------+------------+
+| name  | age  | address    |
++-------+------+------------+
+| Jack |   18 | kerala |
++-------+------+------------+
+1 row in set (0.00 sec)
+
+mysql> drop table information;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> select* from information;
+ERROR 1146 (42S02): Table 'mysql.information' doesn't exist
+mysql> create table marks(name varchar(100),class varchar(100),marks int(200));
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> desc marks;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| name  | varchar(100) | YES  |     | NULL    |       |
+| class | varchar(100) | YES  |     | NULL    |       |
+| marks | int(200)     | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into marks values('Jack',12th,100);
+ERROR 1054 (42S22): Unknown column '12th' in 'field list'
+mysql> insert into marks values('Jack',twelve,100);
+ERROR 1054 (42S22): Unknown column 'twelve' in 'field list'
+mysql> insert into marks values('Jack','twelve',100);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> desc marks;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| name  | varchar(100) | YES  |     | NULL    |       |
+| class | varchar(100) | YES  |     | NULL    |       |
+| marks | int(200)     | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> select* from marks;
++-------+--------+-------+
+| name  | class  | marks |
++-------+--------+-------+
+| Jack | twelve |   100 |
++-------+--------+-------+
+1 row in set (0.00 sec)
+Footer
