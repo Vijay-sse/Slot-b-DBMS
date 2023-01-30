@@ -1,0 +1,156 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| information        |
+| mysql              |
+| performance_schema |
+| student            |
+| test               |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use mysql;
+Database changed
+mysql> create table hogwarts(
+    -> gryffindor varchar(100),
+    -> hufflebuff varchar(100),
+    -> revenclaw  varchar(100),
+    ->
+    -> slytherin  varchar(100));
+Query OK, 0 rows affected (0.31 sec)
+
+mysql> select* from hogwarts;
+Empty set (0.00 sec)
+
+mysql> desc hogwarts;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| gryffindor | varchar(100) | YES  |     | NULL    |       |
+| hufflebuff | varchar(100) | YES  |     | NULL    |       |
+| revenclaw  | varchar(100) | YES  |     | NULL    |       |
+| slytherin  | varchar(100) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+4 rows in set (0.14 sec)
+
+mysql> insert into hogwarts values('Harry');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into hogwarts values('Harry','jack','rose','hermoine');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select* from hogwarts;
++------------+------------+-----------+-----------+
+| gryffindor | hufflebuff | revenclaw | slytherin |
++------------+------------+-----------+-----------+
+| Harry      | jack       | rose      | hermoine  |
++------------+------------+-----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> insert into hogwarts values('Harry','jack','rose','hermoine');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select* from hogwarts;
++------------+------------+-----------+-----------+
+| gryffindor | hufflebuff | revenclaw | slytherin |
++------------+------------+-----------+-----------+
+| Harry      | jack       | rose      | hermoine  |
+| Harry      | jack       | rose      | hermoine  |
++------------+------------+-----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> insert into hogwarts values('Tamil','Yuvanika','Siddharth','Mona');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select* from hogwarts;
++------------+------------+-----------+-----------+
+| gryffindor | hufflebuff | revenclaw | slytherin |
++------------+------------+-----------+-----------+
+| Harry      | jack       | rose      | hermoine  |
+| Harry      | jack       | rose      | hermoine  |
+| Tamil      | Yuvanika   | Siddharth | Mona      |
++------------+------------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> Alter table hogwarts modify slytherin varchar(100);
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select* from hogwarts;
++------------+------------+-----------+-----------+
+| gryffindor | hufflebuff | revenclaw | slytherin |
++------------+------------+-----------+-----------+
+| Harry      | jack       | rose      | hermoine  |
+| Harry      | jack       | rose      | hermoine  |
+| Tamil      | Yuvanika   | Siddharth | Mona      |
++------------+------------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> update hogwarts set slytherin=('vijay');
+Query OK, 3 rows affected (0.09 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select* from hogwarts;
++------------+------------+-----------+-----------+
+| gryffindor | hufflebuff | revenclaw | slytherin |
++------------+------------+-----------+-----------+
+| Harry      | jack       | rose      | vijay     |
+| Harry      | jack       | rose      | vijay     |
+| Tamil      | Yuvanika   | Siddharth | vijay     |
++------------+------------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> Alter table hogwarts modify slytherin varchar(100);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update hogwarts set slytherin=('malfoy');
+Query OK, 3 rows affected (0.06 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select* from hogwarts;
++------------+------------+-----------+-----------+
+| gryffindor | hufflebuff | revenclaw | slytherin |
++------------+------------+-----------+-----------+
+| Harry      | jack       | rose      | malfoy    |
+| Harry      | jack       | rose      | malfoy    |
+| Tamil      | Yuvanika   | Siddharth | malfoy    |
++------------+------------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> Alter table hogwarts add teachers varchar(100) before gryffindor;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'before gryffindor' at line 1
+mysql> Alter table hogwarts add teachers varchar(100) after gryffindor;
+Query OK, 3 rows affected (0.31 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select* from hogwarts;
++------------+----------+------------+-----------+-----------+
+| gryffindor | teachers | hufflebuff | revenclaw | slytherin |
++------------+----------+------------+-----------+-----------+
+| Harry      | NULL     | jack       | rose      | malfoy    |
+| Harry      | NULL     | jack       | rose      | malfoy    |
+| Tamil      | NULL     | Yuvanika   | Siddharth | malfoy    |
++------------+----------+------------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> Alter table hogwarts drop teachers;
+Query OK, 3 rows affected (0.25 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select* from hogwarts;
++------------+------------+-----------+-----------+
+| gryffindor | hufflebuff | revenclaw | slytherin |
++------------+------------+-----------+-----------+
+| Harry      | jack       | rose      | malfoy    |
+| Harry      | jack       | rose      | malfoy    |
+| Tamil      | Yuvanika   | Siddharth | malfoy    |
++------------+------------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> truncate hogwarts;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> select* from hogwarts;
+Empty set (0.00 sec)
